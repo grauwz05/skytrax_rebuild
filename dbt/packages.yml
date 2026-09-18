@@ -1,0 +1,7 @@
+# Same package versions as the original project, so the rebuild can use
+# dbt_utils.generate_surrogate_key (LT-03 onward) and dbt_expectations tests.
+packages:
+  - package: dbt-labs/dbt_utils
+    version: 1.3.0
+  - package: metaplane/dbt_expectations
+    version: 0.10.8
