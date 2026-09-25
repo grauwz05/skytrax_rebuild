@@ -102,13 +102,17 @@ Use their `guess_first_questions`, `observable_requirements`,
 Before diving into whatever the learner asks, check where they actually
 are:
 
-0. **The route is the 52-week AE roadmap** (`https://333roadmap.kimi.page`,
-   week 1 = 2026-09-28; rule 7 in `D:\Data\Project\HUONG-DAN.md`, changed
-   2026-09-25). Its "one task this week" is the FLOOR, not the ceiling —
-   finishing early frees the learner for Python/SQL/English drills, and a
-   slipped week means reschedule, never reset. Do not push a perfectionist
-   schedule on this learner. The page is JS-rendered: `curl` it and read
-   `const DATA` in the script; WebFetch only sees the frame.
+0. **The route is ONE map with two tabs** — the artifact
+   `https://claude.ai/artifact/KFHnfxcji2cRRxtCxequSU` (rule 7 v3 in
+   `D:\Data\Project\HUONG-DAN.md`, 2026-09-25). Tab **52 tuần**: which week
+   it is and what is due (week 1 = 2026-09-28; data in
+   `D:\Data\_meta\maps\roadmap-52w.json` — read that file, not the HTML).
+   Tab **Flight Plan**: how to do the skytrax part, Leg 0–9. Tier 1–2
+   milestones are hard deadlines with internal targets 3 days early in
+   `D:\Data\_meta\HAN.md`. A week's task is the FLOOR, not the ceiling; a
+   slip is handled inside the week, never by resetting ticks. Daily
+   Python/SQL/DSA drills and school exams are outside the roadmap. The Kimi
+   page (333roadmap.kimi.page) is only the archived original.
 1. Read `D:\Data\Project\SkyTrax\.state\FLIGHT_CURSOR.md` — one screen,
    overwrite-only: which roadmap week is open, what is owed (recall
    questions, a push), what the next action is. It is the session cursor.
@@ -117,16 +121,19 @@ are:
 2. Read `D:\Data\Project\SkyTrax\learning\learning_state.json` for any
    ACTIVE misconceptions and current mastery — project truth about the
    learner's state, not this file.
-3. The Flight Plan (`https://claude.ai/artifact/KFHnfxcji2cRRxtCxequSU`) is
-   now the **how-to guide** for the skytrax weeks (W4–6 rebuild
-   LT-01→05, W18–21 LT-06 + CI — all on Snowflake, never DuckDB): the 7-step cycle, guess-first, the
-   solution lock on LT-01..06 all still apply there. Its checkboxes are
-   retired — frozen at the 2026-09-23 state as history. Do not write to its
-   progress db.
-4. Evidence is what the week produces and anyone can re-check: a commit
-   SHA, a green `dbt build`, a public repo. The learner ticks the roadmap
-   page themselves. When asked to verify, quiz them — every line in the
-   repo must be explainable (the roadmap's own rule #5).
+3. Both tabs share ONE tick store: db doc `progress/state` — map `checks`
+   (Flight Plan box ids like `c0-3`, `l6lt1-com`) and map `roadmap`
+   (52-week item ids like `w1-trial`, `w5-build`). Read it with the
+   `ArtifactData` tool (`get`). The skytrax weeks are W1–6, W14–17, W22,
+   all on Snowflake, never DuckDB; the 7-step cycle, guess-first and the
+   solution lock on LT-01..06 apply there.
+4. **Only Claude ticks, only after verifying evidence** — acceptance
+   criteria met, a commit SHA, a green `dbt build`, a public repo, a
+   `learning_state.json` record. The learner saying "done" is not evidence;
+   quiz them — every line in the repo must be explainable. Tick with
+   `ArtifactData update` on `progress/state`, pinned to the version you
+   read. 52-week items that point at a leg/cycle complete from `checks` —
+   never tick them a second time.
 5. Never write "abandoned" / "stopped" for any plan. Not started ≠ given up.
 6. Every session that produces code ends with `git add` + `git commit`
    (message carries the task id) + `git push`. Uncommitted work does not
