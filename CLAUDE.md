@@ -102,29 +102,32 @@ Use their `guess_first_questions`, `observable_requirements`,
 Before diving into whatever the learner asks, check where they actually
 are:
 
-1. Read `D:\Data\Project\SkyTrax\.state\FLIGHT_CURSOR.md` first — one
-   screen, overwrite-only: which Leg/cycle is open, which checkboxes are
-   waiting to be ticked, what the next action is. It is the session cursor.
+0. **The route is the 52-week AE roadmap** (`https://333roadmap.kimi.page`,
+   week 1 = 2026-09-28; rule 7 in `D:\Data\Project\HUONG-DAN.md`, changed
+   2026-09-25). Its "one task this week" is the FLOOR, not the ceiling —
+   finishing early frees the learner for Python/SQL/English drills, and a
+   slipped week means reschedule, never reset. Do not push a perfectionist
+   schedule on this learner. The page is JS-rendered: `curl` it and read
+   `const DATA` in the script; WebFetch only sees the frame.
+1. Read `D:\Data\Project\SkyTrax\.state\FLIGHT_CURSOR.md` — one screen,
+   overwrite-only: which roadmap week is open, what is owed (recall
+   questions, a push), what the next action is. It is the session cursor.
    `WORKFLOW_STATE.md` is the longer state file; read it only when
-   FLIGHT_CURSOR does not answer the question, and never treat its
-   `NEXT ACTION` as outranking the Flight Plan.
-2. Read `D:\Data\Project\SkyTrax\learning\learning_state.json` for concepts
-   due (`learning --due`), any ACTIVE misconceptions, and current mastery —
-   this is project truth about the learner's state, not this file.
-3. Read the Flight Plan roadmap's live progress via the Artifact tool:
-   `action: "read_db"`, `url: "https://claude.ai/code/artifact/93c34119-19cd-4903-b04b-6bb71d8d4c85"`,
-   `collection: "progress"`, `doc_id: "state"` — tells you which Leg/cycle
-   is already ticked, so you don't re-teach what's done or skip ahead of
-   what isn't.
-4. Progress checkboxes on that page are **read-only for the learner** — only
-   the agent ticks one (`write_db`, `if_version` pinned), and only after
-   verifying real evidence (a task's `acceptance_criteria` actually met, a
-   `git` commit SHA in this repo, or an entry in `learning_state.json`) —
-   never from the learner just saying "done."
-5. The route is the Flight Plan, Leg 0 through Leg 9, in order. Read it at
-   session open, tick it at session close, and keep the running position in
-   `FLIGHT_CURSOR.md` in between so the HTML is written once per session,
-   not continuously.
+   FLIGHT_CURSOR does not answer the question.
+2. Read `D:\Data\Project\SkyTrax\learning\learning_state.json` for any
+   ACTIVE misconceptions and current mastery — project truth about the
+   learner's state, not this file.
+3. The Flight Plan (`https://claude.ai/artifact/KFHnfxcji2cRRxtCxequSU`) is
+   now the **how-to guide** for the skytrax weeks (W4–6 rebuild on
+   dbt-duckdb, W18–21 on Snowflake): the 7-step cycle, guess-first, the
+   solution lock on LT-01..06 all still apply there. Its checkboxes are
+   retired — frozen at the 2026-09-23 state as history. Do not write to its
+   progress db.
+4. Evidence is what the week produces and anyone can re-check: a commit
+   SHA, a green `dbt build`, a public repo. The learner ticks the roadmap
+   page themselves. When asked to verify, quiz them — every line in the
+   repo must be explainable (the roadmap's own rule #5).
+5. Never write "abandoned" / "stopped" for any plan. Not started ≠ given up.
 6. Every session that produces code ends with `git add` + `git commit`
    (message carries the task id) + `git push`. Uncommitted work does not
    count as evidence and cannot tick a checkbox.
