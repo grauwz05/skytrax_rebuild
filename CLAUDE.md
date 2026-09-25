@@ -118,8 +118,8 @@ are:
    ACTIVE misconceptions and current mastery — project truth about the
    learner's state, not this file.
 3. The Flight Plan (`https://claude.ai/artifact/KFHnfxcji2cRRxtCxequSU`) is
-   now the **how-to guide** for the skytrax weeks (W4–6 rebuild on
-   dbt-duckdb, W18–21 on Snowflake): the 7-step cycle, guess-first, the
+   now the **how-to guide** for the skytrax weeks (W4–6 rebuild
+   LT-01→05, W18–21 LT-06 + CI — all on Snowflake, never DuckDB): the 7-step cycle, guess-first, the
    solution lock on LT-01..06 all still apply there. Its checkboxes are
    retired — frozen at the 2026-09-23 state as history. Do not write to its
    progress db.
