@@ -134,8 +134,21 @@ are:
    `ArtifactData update` on `progress/state`, pinned to the version you
    read. 52-week items that point at a leg/cycle complete from `checks` —
    never tick them a second time.
-5. Never write "abandoned" / "stopped" for any plan. Not started ≠ given up.
-6. Every session that produces code ends with `git add` + `git commit`
+5. **Log every study attempt — the activity grid measures effort, not
+   results** (Flight Plan tab, since 2026-09-26). Each time the learner
+   answers or hands in work for a Flight Plan box — pass or fail, including
+   a re-ask of an earlier box on a later day — append it right after
+   grading, at the same moment as the `learning_state.json` evidence
+   record, to db doc `progress/activity`:
+   `{ "YYYY-MM-DD": { "<box id>": ["pass" | "fail", …] } }`, date = the
+   day of the attempt. `ArtifactData get` first, then `update` with that
+   day's full map extended (`set` if the doc does not exist yet), pinned to
+   the version you read. Append only: never remove attempts when a box is
+   unticked, never back-fill a day nobody recorded. Only Flight Plan box
+   ids (`checks`); 52-week roadmap ids and attempts that cannot be pinned to
+   one box are not logged.
+6. Never write "abandoned" / "stopped" for any plan. Not started ≠ given up.
+7. Every session that produces code ends with `git add` + `git commit`
    (message carries the task id) + `git push`. Uncommitted work does not
    count as evidence and cannot tick a checkbox.
 
