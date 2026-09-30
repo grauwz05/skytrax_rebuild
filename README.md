@@ -2,4 +2,4 @@
 Tóm lại 3 folder này có ranh giới rõ ràng, nhưng không hoàn toàn độc lập. Chúng tương tác lẫn nhau để cùng nhau phục vụ cho mục đích là tối ưu việc học, rebuild và thực hành Project
 ### 25.9.2026
 1. Hôm nay tôi học về Leg 0, cụ thể là branch (c0-3)
-2.git
+2. c0-3: thi nghiem origin label.
