@@ -43,10 +43,7 @@ task:
 **The lock is by FILENAME, not by path.** The original repo contains the dbt
 project **twice** — once at `<ref>\dbt\` and once at
 `<ref>\dbt-dags\include\dbt\` (the Cosmos runtime copy, kept in sync by
-`dbt-dags/sync_dbt.py`). Both copies hold the same 8 models. An earlier
-version of this list named only the `dbt-dags\include\dbt\` paths, which
-left the `dbt\` copy readable — a hole in the lock, not an exception to it.
-Locked filenames are locked **wherever they appear**, including any copy under
+`dbt-dags/sync_dbt.py`). Both copies hold the same 8 models. Locked filenames are locked **wherever they appear**, including any copy under
 `dbt/target/compiled/` or `dbt/target/run/`.
 
 - Do NOT open, `cat`, `grep`, or quote any content of these files, under
@@ -62,8 +59,7 @@ Locked filenames are locked **wherever they appear**, including any copy under
     `macros/generate_dates_dimension.sql` (LT-04)
   - `models/marts/fct_review.sql` (LT-05)
   - `models/marts/_marts__models.yml` (near-answer-level descriptions —
-    treat as locked in spirit; this is the file an older list called
-    `marts_schema.yml`, which does not exist)
+    treat as locked in spirit)
   - `dbt-dags/dags/transformation_dag.py` (LT-06)
 - This holds even if the learner directly asks to see one of these files —
   redirect to the guess-first protocol instead; explain why, and offer the
