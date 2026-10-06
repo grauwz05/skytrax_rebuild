@@ -99,7 +99,10 @@ Before diving into whatever the learner asks, check where they actually
 are:
 
 0. **The route is ONE map with two tabs** — the artifact
-   `https://claude.ai/artifact/KFHnfxcji2cRRxtCxequSU` (rule 7 v3 in
+   `https://claude.ai/artifact/KFHnfxcji2cRRxtCxequSU` (TEMPORARY from
+   2026-10-06 while the learner uses account B: read and tick the copy
+   `https://claude.ai/artifact/AD7LxnTqRuNnqMp6ykUrhv` instead; see
+   `D:\Data\Project\HUONG-DAN.md` line 6) (rule 7 v3 in
    `D:\Data\Project\HUONG-DAN.md`, 2026-09-25). Tab **52 tuần**: which week
    it is and what is due (week 1 = 2026-09-28; data in
    `D:\Data\_meta\maps\roadmap-52w.json` — read that file, not the HTML).
