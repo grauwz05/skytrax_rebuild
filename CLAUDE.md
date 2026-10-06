@@ -102,9 +102,11 @@ are:
    `https://claude.ai/artifact/KFHnfxcji2cRRxtCxequSU` (account A; from
    2026-10-06 the learner ALTERNATES with account B, copy
    `https://claude.ai/artifact/AD7LxnTqRuNnqMp6ykUrhv` — each has its own
-   tick store, synced through the mirror `D:\Data\_meta\maps\tick-store.json`;
-   before any tick or republish run the steps in
-   `D:\Data\Project\HUONG-DAN.md` section "Hai tài khoản luân phiên") (rule 7 v3 in
+   tick store; the canonical copy is the mirror
+   `D:\Data\_meta\maps\tick-store.json`. A user-level hook tells you which
+   account is logged in and what is out of sync — act on it yourself, never
+   ask the learner; procedure in `D:\Data\Project\HUONG-DAN.md` section
+   "Hai tài khoản luân phiên") (rule 7 v3 in
    `D:\Data\Project\HUONG-DAN.md`, 2026-09-25). Tab **52 tuần**: which week
    it is and what is due (week 1 = 2026-09-28; data in
    `D:\Data\_meta\maps\roadmap-52w.json` — read that file, not the HTML).
@@ -124,27 +126,26 @@ are:
    learner's state, not this file.
 3. Both tabs share ONE tick store: db doc `progress/state` — map `checks`
    (Flight Plan box ids like `c0-3`, `l6lt1-com`) and map `roadmap`
-   (52-week item ids like `w1-trial`, `w5-build`). Read it with the
-   `ArtifactData` tool (`get`). The skytrax weeks are W1–6, W11, W16, W22,
+   (52-week item ids like `w1-trial`, `w5-build`). Read it from the mirror
+   after a SYNC (HUONG-DAN). The skytrax weeks are W1–6, W11, W16, W22,
    all on Snowflake, never DuckDB; the 7-step cycle, guess-first and the
    solution lock on LT-01..06 apply there.
 4. **Only Claude ticks, only after verifying evidence** — acceptance
    criteria met, a commit SHA, a green `dbt build`, a public repo, a
    `learning_state.json` record. The learner saying "done" is not evidence;
    quiz them — every line in the repo must be explainable. Tick with
-   `ArtifactData update` on `progress/state`, pinned to the version you
-   read. 52-week items that point at a leg/cycle complete from `checks` —
+   `python -I -X utf8 -B D:\Data\_meta\maps\tick_sync.py tick <checks|roadmap> <id>`,
+   then SYNC and commit `_meta` — never write the db by hand. 52-week items that point at a leg/cycle complete from `checks` —
    never tick them a second time.
 5. **Log every study attempt — the activity grid measures effort, not
    results** (Flight Plan tab, since 2026-09-26). Each time the learner
    answers or hands in work for a Flight Plan box — pass or fail, including
    a re-ask of an earlier box on a later day — append it right after
    grading, at the same moment as the `learning_state.json` evidence
-   record, to db doc `progress/activity`:
-   `{ "YYYY-MM-DD": { "<box id>": ["pass" | "fail", …] } }`, date = the
-   day of the attempt. `ArtifactData get` first, then `update` with that
-   day's full map extended (`set` if the doc does not exist yet), pinned to
-   the version you read. Append only: never remove attempts when a box is
+   record: `tick_sync.py attempt <YYYY-MM-DD> <box id> <pass|fail>`, then
+   SYNC (it lands in db doc `progress/activity` as
+   `{ "YYYY-MM-DD": { "<box id>": ["pass" | "fail", …] } }`), date = the
+   day of the attempt. Append only: never remove attempts when a box is
    unticked, never back-fill a day nobody recorded. Only Flight Plan box
    ids (`checks`); 52-week roadmap ids and attempts that cannot be pinned to
    one box are not logged.
