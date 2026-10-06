@@ -124,7 +124,7 @@ are:
 3. Both tabs share ONE tick store: db doc `progress/state` — map `checks`
    (Flight Plan box ids like `c0-3`, `l6lt1-com`) and map `roadmap`
    (52-week item ids like `w1-trial`, `w5-build`). Read it with the
-   `ArtifactData` tool (`get`). The skytrax weeks are W1–6, W14–17, W22,
+   `ArtifactData` tool (`get`). The skytrax weeks are W1–6, W11, W16, W22,
    all on Snowflake, never DuckDB; the 7-step cycle, guess-first and the
    solution lock on LT-01..06 apply there.
 4. **Only Claude ticks, only after verifying evidence** — acceptance
