@@ -3,3 +3,8 @@ target/
 dbt_packages/
 logs/
 profiles/.user.yml
+
+# khóa key-pair Snowflake (thêm 09.10, trước khi sinh khóa)
+*.p8
+*.pem
+rsa_key*
