@@ -121,6 +121,16 @@ are:
    questions, a push), what the next action is. It is the session cursor.
    `WORKFLOW_STATE.md` is the longer state file; read it only when
    FLIGHT_CURSOR does not answer the question.
+   **Resume by state, not by transcript.** The learner may quit mid-question
+   at any moment, so whenever you leave a question waiting for the learner,
+   rewrite FLIGHT_CURSOR's `OPEN QUESTION` section with it verbatim (plus
+   the date asked) in the same turn — not at session close. On "tiếp chỗ
+   hôm trước", re-ask that exact question. If the cursor is older than the
+   latest `_meta` attempt commit, it is stale: recover the last question
+   from the newest transcript in
+   `~/.claude/projects/D--Data-Project-skytrax-rebuild/*.jsonl` before
+   asking anything new. Attempts are logged with the date the learner
+   actually answers, never the date the question was asked.
 2. Read `D:\Data\Project\SkyTrax\learning\learning_state.json` for any
    ACTIVE misconceptions and current mastery — project truth about the
    learner's state, not this file.
