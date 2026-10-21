@@ -91,6 +91,13 @@ Use their `guess_first_questions`, `observable_requirements`,
 `acceptance_criteria`, and `self_explanation` fields — never the original
 `.sql`/`.py` files — to run the guess-first / BUILD workflow.
 
+**Enforced by a hook.** A PreToolUse hook
+(`D:\Data\Project\SkyTrax\hooks\skytrax_hook.py pre-tool`) denies these
+filenames, reading `D:\Data\Project\SkyTrax\.agent\solution_lock.json`.
+That JSON is the machine copy of the list above; `hooks/selftest.py` fails
+if the two drift, so change both together. Unlocking a task after its
+attempt = set `unlocked: true` and `attempt_commit: <sha in this repo>`.
+
 ---
 
 ## 4. Orient at the start of every session
@@ -129,7 +136,10 @@ are:
    latest `_meta` attempt commit, it is stale: recover the last question
    from the newest transcript in
    `~/.claude/projects/D--Data-Project-skytrax-rebuild/*.jsonl` before
-   asking anything new. Attempts are logged with the date the learner
+   asking anything new. The SessionStart hook already prints the OPEN
+   QUESTION, flags a stale cursor, and shows the tail of the previous
+   session's last turn (`SkyTrax\.state\LAST_TURN.md`, the safety net) —
+   start from that before opening transcripts. Attempts are logged with the date the learner
    actually answers, never the date the question was asked.
 2. Read `D:\Data\Project\SkyTrax\learning\learning_state.json` for any
    ACTIVE misconceptions and current mastery — project truth about the
