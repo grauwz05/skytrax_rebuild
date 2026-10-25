@@ -141,9 +141,11 @@ are:
    session's last turn (`SkyTrax\.state\LAST_TURN.md`, the safety net) —
    start from that before opening transcripts. Attempts are logged with the date the learner
    actually answers, never the date the question was asked.
-2. Read `D:\Data\Project\SkyTrax\learning\learning_state.json` for any
-   ACTIVE misconceptions and current mastery — project truth about the
-   learner's state, not this file.
+2. The SessionStart hook already prints the due reviews (FSRS) and which
+   of them carry an ACTIVE misconception, so do not open
+   `D:\Data\Project\SkyTrax\learning\learning_state.json` just to orient;
+   open it when grading or recording evidence. It is the project truth about
+   the learner's state, not this file.
 3. Both tabs share ONE tick store: db doc `progress/state` — map `checks`
    (Flight Plan box ids like `c0-3`, `l6lt1-com`) and map `roadmap`
    (52-week item ids like `w1-trial`, `w5-build`). Read it from the mirror
@@ -182,4 +184,6 @@ are:
 still empty scaffolding (only `.gitkeep`) — nothing has been rebuilt yet.
 `dbt/dbt_project.yml`, `dbt/packages.yml`, `profiles/profiles.yml`, and
 `setup/01_snowflake_bootstrap.sql` are real, already-safe infrastructure
-files (see Section 3) and may be read or extended directly.
+files (see Section 3) and may be read or extended directly. Run dbt through
+`setup/dbt.sh`, which loads `.env` (gitignored; template `.env.example`) and
+points `DBT_PROFILES_DIR` at `profiles/`. Checked 25.10, still true.
