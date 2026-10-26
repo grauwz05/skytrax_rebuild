@@ -91,6 +91,8 @@ GRANT ALL ON SCHEMA SKYTRAX_REVIEWS_DB.DBT_DEV     TO ROLE SKYTRAX_TRANSFORMER;
 
 -- 6. Grant the role to your user ----------------------------------------
 -- Replace <YOUR_USERNAME> with the login name of your trial account.
+-- Check it with SELECT CURRENT_USER(); if it comes back lowercase, the user
+-- was created with a quoted identifier, so quote it here too: TO USER "name".
 -- GRANT ROLE SKYTRAX_TRANSFORMER TO USER <YOUR_USERNAME>;
 
 -- 7. Verify --------------------------------------------------------------
