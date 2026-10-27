@@ -16,3 +16,15 @@ skytrax_rebuild:
       schema: "{{ env_var('SNOWFLAKE_SCHEMA', 'DBT_DEV') }}"
       threads: 4
       client_session_keep_alive: false
+    dev_kp:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      private_key_path: "{{ env_var('SNOWFLAKE_PRIVATE_KEY_PATH') }}"
+      private_key_passphrase: "{{ env_var('SNOWFLAKE_PRIVATE_KEY_PASSPHRASE') }}" 
+      role: "{{ env_var('SNOWFLAKE_ROLE', 'SKYTRAX_TRANSFORMER') }}"
+      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE', 'SKYTRAX_COMPUTE_XSMALL') }}"
+      database: "{{ env_var('SNOWFLAKE_DATABASE', 'SKYTRAX_REVIEWS_DB') }}"
+      schema: "{{ env_var('SNOWFLAKE_SCHEMA', 'DBT_DEV') }}"
+      threads: 4
+      client_session_keep_alive: false
