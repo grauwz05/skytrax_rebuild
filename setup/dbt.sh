@@ -15,12 +15,17 @@ set -a
 source "$HERE/.env"
 set +a
 
-for v in SNOWFLAKE_ACCOUNT SNOWFLAKE_USER SNOWFLAKE_PASSWORD; do
+for v in SNOWFLAKE_ACCOUNT SNOWFLAKE_USER; do
   if [ -z "${!v:-}" ]; then
     echo "$v is empty in .env" >&2
     exit 1
   fi
 done
+
+if [ -z "${SNOWFLAKE_PRIVATE_KEY_PATH:-}" ] && [ -z "${SNOWFLAKE_PASSWORD:-}" ]; then
+  echo "need SNOWFLAKE_PRIVATE_KEY_PATH or SNOWFLAKE_PASSWORD in .env" >&2
+  exit 1
+fi
 
 export DBT_PROFILES_DIR="$HERE/profiles"
 cd "$HERE/dbt"
